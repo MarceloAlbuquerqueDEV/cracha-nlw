@@ -1,0 +1,106 @@
+<!--Exemplo de código html aqui-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marcelo Albuquerque - DoWhile 2021</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https: //fonts.googleapis.com/css2? família = Roboto: wght @ 400; 700 & display = swap "
+      rel=" stylesheet "
+    />
+  </head>
+  <body>
+    <main>
+      <div class="conteiner">
+        <div class="avatar">
+          <span>
+            <img src="images/build.svg" alt="Selo Rocketseat" />
+          </span>
+          <img src="images/fotomarcelo.jpg" alt="Foto pessoal" id="userImage" />
+        </div>
+
+        <h1 id="userName">Marcelo Albuquerque</h1>
+        <a
+          id="userLink"
+          href="https://github.com/MarceloAlbuquerqueTI"
+          target="_blank"
+        >
+          <img src="images/github.svg" alt="ícone github" />
+          <span id="userLogin">marceloalbuquerque</span>
+        </a>
+
+        <p id="userBio">
+          An instructor focused on helping pople start programming for web
+        </p>
+
+        <ul id="socialLinks">
+          <li class="youtube">
+            <a
+              href="https://www.youtube.com/marcelorobertoalbuquerque"
+              target="_blank"
+            >
+              <img src="images/youtube.svg" alt="ícone youtube" />
+            </a>
+          </li>
+          <li class="facebook">
+            <a href="https://facebook.com/maalbu.7146" target="_blank">
+              <img src="images/facebook.svg" alt="ícone facebook" />
+            </a>
+          </li>
+          <li class="instagram">
+            <a
+              href="https://instagram.com/marceloalbuquerque857"
+              target="_blank"
+            >
+              <img src="images/instagram.svg" alt="ícone instagram" />
+            </a>
+          </li>
+          <li class="twitter">
+            <a href="https://twitter.com/@marcelodev2021" target="_blank">
+              <img src="images/twitter.svg" alt="ícone twitter" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <script>
+      const linksSocialMedia = {
+        github: 'MarceloAlbuquerqueTI',
+        youtube: 'MarceloRobertoAlbuquerque',
+        facebook: 'maalbu.7146',
+        instagram: 'marceloalbuquerque857',
+        twitter: '@marcelodev2021'
+      }
+
+      function changeSocialMediaLinks() {
+        for (let li of socialLinks.children) {
+          const social = li.getAttribute('class')
+          li.children[0].href = `https://${social}.com/${linksSocialMedia[social]}`
+        }
+      }
+
+      changeSocialMediaLinks()
+
+      function getGitHubProfileInfos() {
+        const url = `https://api.github.com/users/${linksSocialMedia.github}`
+
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            userName.textContent = data.name
+            userBio.textContent = data.bio
+            userLink.href = data.html_url
+            userImage.src = data.avatar_url
+            userLogin.textContent = data.login
+          })
+      }
+
+      getGitHubProfileInfos()
+    </script>
+  </body>
+</html>
